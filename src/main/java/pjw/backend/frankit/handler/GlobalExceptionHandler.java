@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import pjw.backend.frankit.exception.CountLimitException;
 import pjw.backend.frankit.exception.TokenException;
 import pjw.backend.frankit.response.ExceptionResponse;
 
@@ -15,6 +16,12 @@ import java.util.List;
 public class GlobalExceptionHandler {
     @ExceptionHandler(TokenException.class)
     public ResponseEntity<ExceptionResponse> tokenExceptionHandler(TokenException e){
+        ExceptionResponse res = ExceptionResponse.newOne(e.getStatus(), e.getMessage());
+        return ResponseEntity.status(e.getStatus()).body(res);
+    }
+
+    @ExceptionHandler(CountLimitException.class)
+    public ResponseEntity<ExceptionResponse> countLimitExceptionHandler(CountLimitException e){
         ExceptionResponse res = ExceptionResponse.newOne(e.getStatus(), e.getMessage());
         return ResponseEntity.status(e.getStatus()).body(res);
     }

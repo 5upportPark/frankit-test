@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ProductOptionRepositoryImpl extends ProductOptionRepository {
     List<ProductOption> findAllByProductId(Long productId);
+    long countByProductId(Long productId);
 }

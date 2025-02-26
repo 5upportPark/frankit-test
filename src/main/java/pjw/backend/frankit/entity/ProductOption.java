@@ -4,7 +4,11 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pjw.backend.frankit.converter.OptionTypeConverter;
+import pjw.backend.frankit.converter.OptionTypeValueConverter;
 import pjw.backend.frankit.enums.OptionType;
+
+import java.util.List;
 
 @Entity
 @Table(name = "product_option")
@@ -16,12 +20,13 @@ public class ProductOption {
     private Long id;
     private Long productId;
     private String name;
+    @Convert(converter = OptionTypeConverter.class)
     private OptionType type;
-    // TODO:컨버터 달아주기
-    private String typeValue;
+    @Convert(converter = OptionTypeValueConverter.class)
+    private List<String> typeValue;
     private Integer price;
 
-    public static ProductOption newOne(Long productId, String name, OptionType type, String typeValue, Integer price){
+    public static ProductOption newOne(Long productId, String name, OptionType type, List<String> typeValue, Integer price){
         return ProductOption.builder()
                 .productId(productId)
                 .name(name)
@@ -31,7 +36,7 @@ public class ProductOption {
                 .build();
     }
 
-    public void update(String name, OptionType type, String typeValue, Integer price){
+    public void update(String name, OptionType type, List<String> typeValue, Integer price){
         this.name = name;
         this.type = type;
         this.typeValue = typeValue;
@@ -39,7 +44,7 @@ public class ProductOption {
     }
 
     @Builder
-    public ProductOption(Long id, Long productId, String name, OptionType type, String typeValue, Integer price) {
+    public ProductOption(Long id, Long productId, String name, OptionType type, List<String> typeValue, Integer price) {
         this.id = id;
         this.productId = productId;
         this.name = name;

@@ -5,14 +5,15 @@ import lombok.Getter;
 import pjw.backend.frankit.entity.ProductOption;
 import pjw.backend.frankit.enums.OptionType;
 
+import java.util.List;
+
 @Getter
 public class ProductOptionView {
     private Long id;
     private Long productId;
     private String name;
     private OptionType type;
-    // 선택타입용 컨버터 달아주기
-    private String typeValue;
+    private List<String> typeValue;
     private Integer price;
 
     public static ProductOptionView from(ProductOption option){
@@ -27,7 +28,7 @@ public class ProductOptionView {
     }
 
     @Builder
-    public ProductOptionView(Long id, Long productId, String name, OptionType type, String typeValue, Integer price) {
+    public ProductOptionView(Long id, Long productId, String name, OptionType type, List<String> typeValue, Integer price) {
         this.id = id;
         this.productId = productId;
         this.name = name;
