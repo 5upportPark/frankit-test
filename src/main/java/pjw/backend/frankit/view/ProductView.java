@@ -5,6 +5,7 @@ import lombok.Getter;
 import pjw.backend.frankit.entity.Product;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Getter
 public class ProductView {
@@ -14,6 +15,8 @@ public class ProductView {
     private Integer price;
     private Integer deliveryFee;
     private ZonedDateTime createdAt;
+
+    private List<ProductOptionView> options;
 
     public static ProductView from(Product product){
         return ProductView.builder()
@@ -26,15 +29,20 @@ public class ProductView {
                 .build();
     }
 
+    public void changeOptions(List<ProductOptionView> options){
+        this.options = options;
+    }
+
     private ProductView(){}
 
     @Builder
-    public ProductView(Long id, String name, String detail, Integer price, Integer deliveryFee, ZonedDateTime createdAt) {
+    public ProductView(Long id, String name, String detail, Integer price, Integer deliveryFee, ZonedDateTime createdAt, List<ProductOptionView> options) {
         this.id = id;
         this.name = name;
         this.detail = detail;
         this.price = price;
         this.deliveryFee = deliveryFee;
         this.createdAt = createdAt;
+        this.options = options;
     }
 }
