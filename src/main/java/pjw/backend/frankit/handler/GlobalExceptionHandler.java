@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponse> methodArgumentExceptionHandler(MethodArgumentNotValidException e){
         BindingResult br = e.getBindingResult();
         List<ExceptionResponse.FieldError> errorList = br.getFieldErrors().stream().map(err-> new ExceptionResponse.FieldError(err.getField(), err.getDefaultMessage())).toList();
-        ExceptionResponse res = ExceptionResponse.newOne(HttpStatus.BAD_REQUEST, e.getMessage(), errorList);
+        ExceptionResponse res = ExceptionResponse.newOne(HttpStatus.BAD_REQUEST, "입력 값이 잘못되었습니다.", errorList);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(res);
     }
 

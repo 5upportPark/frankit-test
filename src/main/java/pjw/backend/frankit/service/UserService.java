@@ -3,6 +3,7 @@ package pjw.backend.frankit.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pjw.backend.frankit.entity.User;
+import pjw.backend.frankit.exception.DataNotFoundException;
 import pjw.backend.frankit.repositoryImpl.UserRepositoryImpl;
 import pjw.backend.frankit.request.LoginRequest;
 import pjw.backend.frankit.response.LoginResponse;
@@ -18,7 +19,7 @@ public class UserService {
 
     @Transactional
     public LoginResponse userLogin(LoginRequest req){
-        User user = userRepositoryImpl.findAllByEmail(req.getEmail()).orElseThrow(RuntimeException::new);
+        User user = userRepositoryImpl.findAllByEmail(req.getEmail()).orElseThrow(DataNotFoundException::new);
 
         if (!req.getPassword().equals(user.getPassword())){
             return LoginResponse.builder()
