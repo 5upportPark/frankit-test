@@ -6,7 +6,6 @@ import pjw.backend.frankit.entity.ProductOption;
 import pjw.backend.frankit.exception.CountLimitException;
 import pjw.backend.frankit.exception.DataNotFoundException;
 import pjw.backend.frankit.repositoryImpl.ProductOptionRepositoryImpl;
-import pjw.backend.frankit.repositoryImpl.ProductRepositoryImpl;
 import pjw.backend.frankit.request.ProductOptionRequest;
 import pjw.backend.frankit.view.ProductOptionView;
 
@@ -34,7 +33,7 @@ public class ProductOptionService {
             throw new CountLimitException(String.format("옵션은 %d개 까지만 설정 가능합니다.", OPTION_MAX_COUNT));
 
         ProductOption option = ProductOption.newOne(req.getProductId(), req.getName(), req.getType(), req.getTypeValue(), req.getPrice());
-        productOptionRepositoryImpl.save(option);
+        option = productOptionRepositoryImpl.save(option);
         return ProductOptionView.from(option);
     }
 

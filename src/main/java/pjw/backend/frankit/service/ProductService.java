@@ -59,13 +59,14 @@ public class ProductService {
         if(req.getId() == null || req.getId().equals(0L)) throw new DataNotFoundException();
         Product product = productRepositoryImpl.findById(req.getId()).orElseThrow(DataNotFoundException::new);
         product.update(req.getName(), req.getDetail(), req.getPrice(), req.getDeliveryFee());
-        productRepositoryImpl.save(product);
+        product = productRepositoryImpl.save(product);
         return ProductView.from(product);
     }
 
     @Transactional
     public void deleteProduct(Long id){
         productRepositoryImpl.deleteById(id);
+        productOptionRepositoryImpl.deleteByProductId(id);
     }
 
 }

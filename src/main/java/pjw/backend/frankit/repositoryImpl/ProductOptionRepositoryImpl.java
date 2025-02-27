@@ -12,4 +12,5 @@ public interface ProductOptionRepositoryImpl extends ProductOptionRepository {
     List<ProductOption> findAllByProductId(Long productId);
     List<ProductOption> findAllByProductIdIn(Collection<Long> productIds);
     long countByProductId(Long productId);
+    void deleteByProductId(Long productId);
 }
