@@ -29,19 +29,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 public class ProductServiceTest {
     @Mock
-    ProductRepositoryImpl productRepositoryImpl;
+    private ProductRepositoryImpl productRepositoryImpl;
     @Mock
-    ProductOptionRepositoryImpl productOptionRepositoryImpl;
+    private ProductOptionRepositoryImpl productOptionRepositoryImpl;
+    
     @InjectMocks
-    ProductService productService;
-    private static final int PAGE_SIZE = 10;
+    private ProductService productService;
 
-    final Long id = 1L;
-    List<Product> productList;
-    List<ProductView> viewList;
-    Product entity;
-    ProductRequest req;
-    List<ProductOptionView> optionViewList;
+    private final Long id = 1L;
+    private List<Product> productList;
+    private List<ProductView> viewList;
+    private Product entity;
+    private ProductRequest req;
 
     @BeforeEach
     public void 초기화(){
